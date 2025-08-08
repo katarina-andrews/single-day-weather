@@ -3,10 +3,25 @@ import { useState, useEffect } from "react";
 export default function WeatherApp() {
   const [city, setCity] = useState("Chicago");
   const [weatherData, setWeatherData] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState({message: "", status: false});
+
+  function weatherDisplay() {
+    if(weatherData) {
+        return (
+            <div id="weather-div">
+                <p>Temperature: <span>{weatherData && weatherData.main.temp}</span></p>
+                <p>Feels Like: <span>{weatherData && weatherData.main.feels_like}</span></p>
+                <p>Description: <span>{weatherData && weatherData.weather[0].description}</span></p>
+                <p>Icon<span>{weatherData && weatherData.weather[0].icon}</span></p>
+            </div>
+        )
+    }
+  }
 
   useEffect(() => {
-
     async function getWeather() {
+      setLoading(true);
       const key = import.meta.env.VITE_WEATHER_API_KEY;
       const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${key}&units=imperial`;
 
@@ -19,11 +34,11 @@ export default function WeatherApp() {
         const result = await response.json();
         console.log(result);
         setWeatherData(result);
-    
       } catch (error) {
         console.error(error);
-
+        setError({message: error.message, status: true})
       } finally {
+        setLoading(false);
       }
     }
 
@@ -34,14 +49,17 @@ export default function WeatherApp() {
     <>
       <section>
         <h2>Current Weather for {city}</h2>
-        {weatherData && weatherData.main.temp}
-        <br/>
-        {weatherData && weatherData.main.feels_like}
 
-        <br/>
-        {weatherData && weatherData.weather[0].main}
-          <br/>
-        {weatherData && weatherData.weather[0].description}
+        {error.status && (
+          <p>Whoops! Error fetching weather. {error.message} </p>
+        )}
+
+        {loading && <p>Loading...</p>}
+
+        {weatherDisplay()}
+    
+
+       
 
         {/* <form>
             <label htmlFor="city">Enter a City</label>
