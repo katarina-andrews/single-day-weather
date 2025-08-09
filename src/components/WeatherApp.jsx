@@ -10,10 +10,9 @@ export default function WeatherApp() {
     if(weatherData) {
         return (
             <div id="weather-div">
-                <p>Temperature: <span>{weatherData && weatherData.main.temp}</span></p>
-                <p>Feels Like: <span>{weatherData && weatherData.main.feels_like}</span></p>
-                <p>Description: <span>{weatherData && weatherData.weather[0].description}</span></p>
-                <p>Icon<span>{weatherData && weatherData.weather[0].icon}</span></p>
+                <p>Temperature</p><span>{weatherData && weatherData.main.temp}</span>
+                <p>Feels Like</p> <span>{weatherData && weatherData.main.feels_like}</span>
+                <p>Description</p> <span>{weatherData && weatherData.weather[0].description}</span>
             </div>
         )
     }
@@ -58,14 +57,6 @@ export default function WeatherApp() {
 
         {weatherDisplay()}
     
-
-       
-
-        {/* <form>
-            <label htmlFor="city">Enter a City</label>
-            <input type="text" name="city" id="city" />
-            <button type="submit">Get Weather</button>
-        </form> */}
       </section>
     </>
   );
