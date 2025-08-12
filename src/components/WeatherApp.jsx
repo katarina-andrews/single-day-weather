@@ -4,17 +4,53 @@ export default function WeatherApp() {
   const [city, setCity] = useState("Chicago");
   const [weatherData, setWeatherData] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState({message: "", status: false});
+  const [error, setError] = useState({ message: "", status: false });
 
   function weatherDisplay() {
-    if(weatherData) {
-        return (
-            <div id="weather-div">
-                <p>Temperature</p><span>{weatherData && weatherData.main.temp}</span>
-                <p>Feels Like</p> <span>{weatherData && weatherData.main.feels_like}</span>
-                <p>Description</p> <span>{weatherData && weatherData.weather[0].description}</span>
-            </div>
-        )
+    if (weatherData) {
+      return (
+        <>
+          <h2>Temperature (in fahrenheit)</h2>
+          <table>
+            <tbody>
+              <tr>
+                <td>Current</td>
+                <td>{weatherData && weatherData.main.temp}</td>
+              </tr>
+              <tr>
+                <td>Feels like</td>
+                <td>{weatherData && weatherData.main.feels_like}</td>
+              </tr>
+              <tr>
+                <td>Minimum</td>
+                <td>{weatherData && weatherData.main.temp_min}</td>
+              </tr>
+              <tr>
+                <td>Maximum</td>
+                <td>{weatherData && weatherData.main.temp_max}</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h2>Additional information</h2>
+          <table>
+            <tbody>
+              <tr>
+                <td>Humidity</td>
+                <td>{weatherData && weatherData.main.humidity} %</td>
+              </tr>
+              <tr>
+                <td>Description</td>
+                <td>{weatherData && weatherData.weather[0].description}</td>
+              </tr>
+              <tr>
+                <td>Wind</td>
+                <td>{weatherData && weatherData.wind.speed} mph</td>
+              </tr>
+            </tbody>
+          </table>
+        </>
+      );
     }
   }
 
@@ -35,7 +71,7 @@ export default function WeatherApp() {
         setWeatherData(result);
       } catch (error) {
         console.error(error);
-        setError({message: error.message, status: true})
+        setError({ message: error.message, status: true });
       } finally {
         setLoading(false);
       }
@@ -47,16 +83,13 @@ export default function WeatherApp() {
   return (
     <>
       <section>
-        <h2>Current Weather for {city}</h2>
+        <h2 id="title">{city}</h2>
 
-        {error.status && (
-          <p>Whoops! Error fetching weather. {error.message} </p>
-        )}
+        {error.status && <p>Error fetching weather. {error.message} </p>}
 
         {loading && <p>Loading...</p>}
 
         {weatherDisplay()}
-    
       </section>
     </>
   );

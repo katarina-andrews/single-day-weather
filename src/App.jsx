@@ -5,7 +5,7 @@ function App() {
   return (
     <>
       <header>
-        <h1>Weather App</h1>
+        <h1>Weather Now!</h1>
       </header>
       <main>
         <WeatherApp />

@@ -1,35 +1,37 @@
-header,
-section {
+h1,
+h2 {
   text-align: center;
 }
 
-header {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  transition: 0.3s;
-  padding: 3rem;
-  border: 1px white solid;
-  background-image: url("src/sky.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  letter-spacing: 15px;
+h2 {
+  padding: 1rem;
 }
 
-p {
+#title {
+  font-size: 2rem;
+}
+
+td:nth-child(1) {
   font-weight: bold;
   font-size: 1.5rem;
 }
 
-span {
-  font-size: 1.5rem;
+table {
+  width: 100%;
+  border-collapse: collapse;
+   border: none;
 }
 
-#weather-div {
-  border: 1px white solid;
-  padding: 3rem;
-  text-align: center;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  transition: 0.3s;
-  background-image: url("src/sky.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
+td {
+  padding: 10px;
+}
+
+tr {
+  border-bottom: 1px solid grey;
+}
+
+td:nth-child(2) {
+  text-align: right;
+   font-size: 1.5rem;
+   color: #6495ED;
 }
